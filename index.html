@@ -396,7 +396,16 @@ input,select,textarea{width:100%;padding:.8em 1.1em;border-radius:16px;border:0;
 textarea{min-height:130px;resize:vertical}
 .act{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
 footer{background:var(--ink);padding-block:28px;color:var(--muted);font-size:.98rem}
-footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.vc{display:inline-flex;align-items:center;gap:12px;padding:8px 18px 8px 14px;border-radius:99px;background:var(--glass);border:1.5px solid var(--line);color:var(--cream);opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s var(--ease)}
+.vc.on{opacity:1;transform:none}
+.vc[hidden]{display:none}
+.vc svg{width:22px;height:22px;color:var(--sun);flex:none}
+.vc .tx{display:flex;flex-direction:column;align-items:center;line-height:1.15}
+.vc .tx small{font-size:.78rem;color:var(--muted);font-weight:500}
+.vc .tx b{font-size:1.35rem;font-weight:900;color:var(--sun);direction:ltr;font-variant-numeric:tabular-nums}
+.vc .dot{width:14px;height:14px;background:var(--sun);box-shadow:0 0 0 5px rgba(255,194,122,.22)}
+
 #toast{position:fixed;inset-inline:0;bottom:26px;margin-inline:auto;width:max-content;max-width:90vw;z-index:95;padding:.6em 1.6em;border-radius:99px;background:var(--or);color:var(--on-or);font-weight:700;opacity:0;transform:translateY(14px);pointer-events:none;transition:.3s}
 #toast.show{opacity:1;transform:none}
 .fab{position:fixed;z-index:55;left:22px;bottom:22px;transform:translateY(90px);transition:transform .5s var(--ease)}
@@ -634,7 +643,9 @@ body.calm .rv{opacity:1;transform:none}
   </section>
 </main>
 
-<footer><div class="wrap"><span id="foot"></span><a href="#top">العودة للأعلى</a></div></footer>
+<footer><div class="wrap"><span id="foot"></span>
+  <div class="vc" id="vc" hidden aria-live="polite" title="عدد زوّار الموقع"><i class="dot" aria-hidden="true"></i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><circle cx="17" cy="9" r="2.4"/><path d="M17 14.2c2.4 0 4.2 1.7 4.2 4.3"/></svg><span class="tx"><small>زوّار الموقع</small><b id="vcN">0</b></span></div>
+  <a href="#top">العودة للأعلى</a></div></footer>
 <div class="fab" id="fab"><a class="btn btn-or" id="fabWa" href="#" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#wa"/></svg>راسلني</a></div>
 
 <dialog id="modal" aria-labelledby="mT">
@@ -934,6 +945,33 @@ $("#svcList").addEventListener("click", e => {
     ic.style.setProperty("--rx", Math.max(-1, Math.min(1, y)) * -20 + "deg");
   });
   sec.addEventListener("pointerleave", () => { ic.style.setProperty("--ry", "0deg"); ic.style.setProperty("--rx", "0deg"); });
+})();
+
+
+/* ---- عدّاد الزوّار ----
+   يعمل على الموقع المنشور فقط (github.io أو نطاقك الخاص)، ولا يحسب فتح الملف من الجهاز.
+   كل متصفح يُحسب مرة واحدة فقط، والزيارات التالية تعرض الرقم دون زيادته.
+   إذا تعذّر الاتصال بالخدمة يبقى العدّاد مخفياً ولا يظهر رقم وهمي. */
+(() => {
+  const BOX = $("#vc"), NUM = $("#vcN"); if (!BOX || !NUM) return;
+  const host = location.hostname;
+  if (!host || host === "localhost" || host === "127.0.0.1" || location.protocol === "file:") return;
+  const NS = "alaasaleem-portfolio", KEY = "visits", BASE = "https://abacus.jasoncameron.dev";
+  let counted = false;
+  try { counted = localStorage.getItem("vc_counted") === "1"; } catch (e) {}
+  const url = `${BASE}/${counted ? "get" : "hit"}/${NS}/${KEY}`;
+  const show = n => {
+    BOX.hidden = false; requestAnimationFrame(() => BOX.classList.add("on"));
+    if (reduce || n < 2) { NUM.textContent = n.toLocaleString("en-US"); return; }
+    const t0 = performance.now(), D = 1400;
+    const tick = t => { const k = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - k, 3); NUM.textContent = Math.round(n * e).toLocaleString("en-US"); if (k < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  };
+  fetch(url).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+    if (!d || typeof d.value !== "number") return;
+    if (!counted) { try { localStorage.setItem("vc_counted", "1"); } catch (e) {} }
+    show(d.value);
+  }).catch(() => {});
 })();
 
 /* ---- الأسلوب والخبرات ---- */
