@@ -234,6 +234,36 @@ section{position:relative;padding-block:clamp(72px,10vw,140px)}
 .head{display:flex;justify-content:space-between;align-items:end;gap:20px 40px;flex-wrap:wrap;margin-bottom:46px}
 .head h2{font-size:clamp(2.3rem,5.6vw,4.8rem)}
 .head p{max-width:30em;color:var(--cream)}
+/* ---- آراء العملاء ---- */
+.rev,.rev *{font-family:var(--f)}
+.rev{background:radial-gradient(800px 460px at 8% 0%,rgba(255,138,31,.12),transparent 70%),var(--bg);border-top:1px solid var(--line);overflow:hidden}
+.rev .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.rcard{position:relative;display:flex;flex-direction:column;gap:20px;padding:30px 28px 24px;border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1.5px solid var(--line);transition:transform .45s var(--ease),border-color .3s,box-shadow .45s}
+.rcard:hover{transform:translateY(-8px);border-color:var(--or);box-shadow:0 26px 50px -22px rgba(255,138,31,.45)}
+.rcard .qm{position:absolute;top:-16px;right:24px;width:40px;height:40px;border-radius:50%;background:var(--or);color:var(--on-or);display:grid;place-items:center;font-size:1.9rem;font-weight:900;line-height:1;padding-top:.28em;box-shadow:0 10px 24px -6px rgba(255,138,31,.7)}
+.rcard blockquote{margin:0;font-size:1.12rem;line-height:1.85;color:#fff;flex:1}
+.rcard .by{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px dashed rgba(255,185,115,.3)}
+.rcard .av{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#ffc27a,#d2691a);color:var(--on-or)}
+.rcard .av svg{width:22px;height:22px}
+.rcard .by b{display:block;font-weight:700;color:var(--cream);line-height:1.3}
+.rcard .by small{display:block;color:var(--muted);font-size:.86rem}
+.rcard .tg{margin-inline-start:auto;font-size:.78rem;padding:.25em .9em;border-radius:99px;border:1.5px solid var(--line);color:var(--sun);white-space:nowrap}
+.rcard.big{grid-column:span 2;background:linear-gradient(150deg,var(--or),var(--or2));border-color:transparent;color:var(--on-or);padding:38px 40px 28px;overflow:hidden}
+.rcard.big::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(28,14,5,.14) 1.2px,transparent 1.7px);background-size:18px 18px;pointer-events:none}
+.rcard.big::after{content:"";position:absolute;left:-60px;bottom:-70px;width:260px;height:260px;background:rgba(28,14,5,.12);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-100 -100 200 200'%3E%3Cpath d='M0,-100 C8,-34 34,-8 100,0 C34,8 8,34 0,100 C-8,34 -34,8 -100,0 C-34,-8 -8,-34 0,-100Z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-100 -100 200 200'%3E%3Cpath d='M0,-100 C8,-34 34,-8 100,0 C34,8 8,34 0,100 C-8,34 -34,8 -100,0 C-34,-8 -8,-34 0,-100Z'/%3E%3C/svg%3E") center/contain no-repeat;animation:spin 40s linear infinite;pointer-events:none}
+.rcard.big>*{position:relative;z-index:1}
+.rcard.big blockquote{color:var(--on-or);font-size:clamp(1.3rem,2.3vw,1.85rem);font-weight:700;line-height:1.7}
+.rcard.big .qm{background:var(--on-or);color:var(--or);box-shadow:0 10px 24px -6px rgba(0,0,0,.5)}
+.rcard.big .by{border-top-color:rgba(28,14,5,.35)}
+.rcard.big .by b{color:var(--on-or)}
+.rcard.big .by small{color:rgba(28,14,5,.75)}
+.rcard.big .av{background:var(--on-or);color:var(--or)}
+.rcard.big .tg{border-color:rgba(28,14,5,.45);color:var(--on-or)}
+.rcard.big:hover{box-shadow:0 30px 60px -22px rgba(255,138,31,.7)}
+.rev .rgrid.n4 .rcard.big{grid-column:1/-1}
+@media (max-width:900px){.rev .rgrid{grid-template-columns:1fr 1fr}.rev .rgrid.n4 .rcard:nth-child(4){grid-column:span 2}.rcard.big{grid-column:span 2}}
+@media (max-width:620px){.rev .rgrid{grid-template-columns:1fr;gap:26px}.rev .rgrid.n4 .rcard:nth-child(4),.rev .rgrid.n4 .rcard.big{grid-column:auto}.rcard.big{grid-column:auto;padding:34px 24px 24px}.rcard{padding:28px 22px 22px}}
+
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .9s var(--ease)}
 .rv.in{opacity:1;transform:none}
 
@@ -616,6 +646,14 @@ body.calm .rv{opacity:1;transform:none}
   </section>
 
   <!-- التواصل -->
+  <!-- آراء العملاء -->
+  <section class="rev" id="reviews" hidden>
+    <div class="wrap">
+      <div class="head"><h2 class="rv" id="revT"></h2><p class="rv" id="revL"></p></div>
+      <div class="rgrid" id="revGrid"></div>
+    </div>
+  </section>
+
   <section id="contact" class="contact">
     <div class="wrap" style="position:relative">
       <div class="chero">
@@ -735,6 +773,18 @@ const CONFIG = {
     { n: "X",         d: "المنشورات والصفحة الشخصية", u: "https://x.com/AlaaSaleem2002", h: "x.com/AlaaSaleem2002" },
     { n: "LinkedIn",  d: "الخبرة والتعليم والتوصيات", u: "https://www.linkedin.com/in/atsdes02", h: "linkedin.com/in/atsdes02" },
     { n: "Pinterest", d: "لوحات إلهام وأفكار تصميم", u: "https://www.pinterest.com/ATSdes02/", h: "pinterest.com/ATSdes02" }
+  ],
+  /* ===== آراء العملاء =====
+     الآراء مأخوذة من رسائل العملاء الفعلية مع تصحيح لغوي فقط.
+     الأول يظهر بالبطاقة البرتقالية الكبيرة. يمكنك حذف أي رأي أو إضافة غيره.
+     إذا تركت القائمة فارغة [] يختفي القسم كاملاً. */
+  testimonialsTitle: "كلمات من عملائي",
+  testimonialsLead: "أثر التصميم يظهر في رضا أصحابه.",
+  testimonials: [
+    { text: "الله يسعدك م. علاء، بإذن الله سيكون لنا تعامل آخر معك. نحن نقدّر تفانيك واحترافيتك في هذا المجال، ونتطلع لمواصلة التعاون في المستقبل. شكراً على الاحترافية، فأنت متعاون وصبور على أي تعديل. كل التوفيق لك.", who: "صاحب علامة تجارية", tag: "هوية بصرية ومطبوعات" },
+    { text: "ما شاء الله عليه الأستاذ علاء، تصميم احترافي وسرعة في التنفيذ.", who: "صاحب مؤسسة", tag: "إنفوجرافيك" },
+    { text: "شكراً لك أستاذ على العمل الإبداعي، متعاون جداً وسريع.", who: "صاحب محل تجاري", tag: "سوشيال ميديا" },
+    { text: "والله إنك وحش في التصميم، أقسم بالله! شغل محترم ما شاء الله، الله يوفقك ويعطيك يا رب.", who: "صاحب متجر إلكتروني", tag: "بنرات المواقع" }
   ],
   contactTitle: "عندك رؤية؟ خلّينا نصمّمها."
 };
@@ -972,6 +1022,23 @@ $("#svcList").addEventListener("click", e => {
     if (!counted) { try { localStorage.setItem("vc_counted", "1"); } catch (e) {} }
     show(d.value);
   }).catch(() => {});
+})();
+
+
+/* ---- آراء العملاء ---- */
+(() => {
+  const list = C.testimonials || [], sec = $("#reviews"); if (!sec) return;
+  if (!list.length) { sec.remove(); return; }
+  sec.hidden = false;
+  $("#revGrid").classList.add("n" + list.length);
+  $("#revT").textContent = C.testimonialsTitle; $("#revL").textContent = C.testimonialsLead;
+  const user = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c0-4 3.4-6.2 7.5-6.2s7.5 2.200 7.500 6.200"/></svg>`;
+  $("#revGrid").innerHTML = list.map((t, i) => `
+    <figure class="rcard rv${i === 0 ? " big" : ""}" style="transition-delay:${i * 80}ms">
+      <span class="qm" aria-hidden="true">”</span>
+      <blockquote>${esc(t.text)}</blockquote>
+      <figcaption class="by"><span class="av">${user}</span><span><b>${esc(t.who)}</b></span>${t.tag ? `<span class="tg">${esc(t.tag)}</span>` : ""}</figcaption>
+    </figure>`).join("");
 })();
 
 /* ---- الأسلوب والخبرات ---- */
