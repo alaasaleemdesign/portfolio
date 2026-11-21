@@ -7,11 +7,96 @@
   <title>لوحة تحكم موقع علاء سليم</title>
   <link href="config.yml" type="text/yaml" rel="cms-config-url">
   <style>
-    body{margin:0;background:#150a04}
-    #nc-root{min-height:100vh}
+    /* Admin-only presentation layer. Pinned to Decap 3.18.0. No content writes. */
+@font-face{font-family:AdminArabic;src:url('../fonts/thmanyah-400.woff2') format('woff2');font-weight:400;font-display:swap}@font-face{font-family:AdminArabic;src:url('../fonts/thmanyah-700.woff2') format('woff2');font-weight:700;font-display:swap}
+body{margin:0;background:#f5f5f7;font-family:AdminArabic,Arial,sans-serif!important}#nc-root{min-height:100vh}button,input,textarea,select{font-family:inherit!important}button,a,input,textarea{touch-action:manipulation}button:focus-visible,a:focus-visible{outline:3px solid #d67e45!important;outline-offset:3px}
+body.aa-editor [class*='EditorContainer']{padding-right:240px!important;background:#f5f5f7}body.aa-editor [class*='ToolbarContainer']{left:0!important;right:0!important;width:100%!important;z-index:300!important;background:#fff!important;border-bottom:1px solid #e6e6eb!important}body.aa-editor [class*='ToolbarContainer'] button{border-radius:7px!important}
+body.aa-editor [class*='NoPreviewContainer']{width:100%!important;max-width:none!important;margin:0!important;background:transparent!important;box-shadow:none!important}body.aa-editor [class*='PreviewPaneContainer-ControlPaneContainer']{width:100%!important;background:#f5f5f7!important}
+.aa-pane{direction:rtl;box-sizing:border-box!important;max-width:940px!important;margin:0 auto!important;padding:36px 36px 80px!important}.aa-pane:before{content:attr(data-aa-title);display:block;font-size:28px;font-weight:700;color:#26262d;margin:0 0 10px;line-height:1.7}.aa-pane:after{content:'راجع المحتوى قبل النشر. التغييرات المنشورة تظهر لزوار موقعك.';display:block;color:#85858e;font-size:12px;line-height:2;padding-top:8px}
+.aa-pane>.aa-field{box-sizing:border-box!important;margin:0 0 18px!important;background:#fff!important;border:1px solid #e4e4eb!important;border-radius:12px!important;padding:22px 24px!important;box-shadow:none!important;min-width:0}.aa-pane>.aa-field.aa-hide{display:none!important}.aa-pane [class*='ControlTopbar']{background:transparent!important;min-height:25px!important;line-height:1.8!important}.aa-pane label{position:static!important;background:transparent!important;color:#34343d!important;font-size:13px!important;line-height:1.9!important;padding:0!important;margin-bottom:8px!important;font-weight:700!important}.aa-pane input:not([type='checkbox']),.aa-pane textarea{background:#fbfbfd!important;color:#303039!important;border:1px solid #dedee7!important;border-radius:8px!important;font-size:15px!important;line-height:1.9!important;padding:12px 14px!important;text-align:right;direction:rtl;box-shadow:none!important;min-height:48px!important}.aa-pane input:focus,.aa-pane textarea:focus{outline:2px solid #c47844!important;outline-offset:2px}.aa-pane input[id^='nameEn-'],.aa-pane input[id^='ringText-'],.aa-pane input[id^='whatsapp-'],.aa-pane input[id^='phoneShown-'],.aa-pane input[type='url'],.aa-pane input[type='number']{direction:ltr;text-align:left}.aa-pane button{border-radius:7px!important;min-height:34px}.aa-pane [class*='Hint']{font-size:12px!important;color:#747580!important;line-height:1.9!important}.aa-help{font-size:12px;color:#85858f;margin:10px 0 0;line-height:1.9;direction:rtl}.aa-pane [class*='ListItem']{border-radius:8px!important}.aa-pane [class*='ListControl']{direction:rtl}.aa-pane img{max-width:100%}
+#aa-navigation{position:fixed;z-index:200;top:66px;bottom:0;right:0;width:240px;background:#222329;color:#c5c5ce;direction:rtl;padding:30px 18px 22px;box-sizing:border-box;overflow-y:auto;font-family:AdminArabic,Arial,sans-serif}.aa-brand{color:white;font-size:23px;font-weight:700;margin:0 12px 7px}.aa-subtitle{font-size:12px;color:#9b9ca8;margin:0 12px 26px;padding-bottom:24px;border-bottom:1px solid #3a3a43}.aa-sectionbutton{display:flex;align-items:center;gap:12px;text-align:right;width:100%;border:0;background:transparent;color:#bdbec9;border-radius:9px;padding:13px 14px;margin-bottom:6px;line-height:1.8;min-height:48px;font:inherit;font-size:13px;cursor:pointer}.aa-sectionbutton span{font-size:10px;opacity:.65}.aa-sectionbutton:hover{background:#303137;color:white}.aa-sectionbutton[aria-pressed='true']{background:#423229;color:#ffc092}.aa-navhint{font-size:11px;color:#9b9ca7;line-height:2;margin:22px 12px 12px}.aa-classic{font-size:11px;color:#d1d1d8;display:block;margin:14px 12px;line-height:2}.aa-pane [class*='ControlContainer'] [class*='ControlContainer']{margin-top:12px!important}.aa-pane [role='alert']{color:#b51c30!important}.aa-mobilelabel{display:none}
+@media(max-width:760px){body.aa-editor [class*='EditorContainer']{padding-right:0!important}#aa-navigation{top:66px;bottom:auto;width:100%;padding:12px 16px 10px;max-height:175px;border-bottom:1px solid #ddd}.aa-brand{font-size:16px;display:inline;margin:0 0 0 10px}.aa-subtitle{display:inline;font-size:10px;padding:0;border:0;margin:0}.aa-navbuttons{display:flex;flex-wrap:wrap;gap:4px;margin-top:12px}.aa-sectionbutton{width:auto;min-height:36px;margin:0;padding:6px 9px;font-size:10px;gap:5px;border-radius:6px}.aa-sectionbutton span{display:none}.aa-navhint{display:none}.aa-classic{display:inline-block;font-size:9px;margin:8px 0 0}.aa-pane{padding:178px 16px 70px!important}.aa-pane:before{font-size:23px;margin-bottom:16px}.aa-pane>.aa-field{padding:18px!important;margin-bottom:14px!important}.aa-pane label{font-size:12px!important}.aa-pane input:not([type='checkbox']),.aa-pane textarea{font-size:16px!important}.aa-help{font-size:11px}.aa-pane:after{font-size:11px}body.aa-editor [class*='ToolbarContainer']{overflow:visible!important}body.aa-editor [class*='ToolbarContainer'] [class*='BackLink']{max-width:118px!important}body.aa-editor [class*='ToolbarContainer'] [class*='Status']{font-size:10px!important}}
+body.aa-editor [class*='EditorContainer'],body.aa-editor [class*='ToolbarContainer']{min-width:0!important;box-sizing:border-box!important}body.aa-editor [class*='Editor ']{min-width:0!important}body.aa-editor [class*='PreviewPaneContainer-ControlPaneContainer']{box-sizing:border-box!important;padding:0!important}.aa-pane input,.aa-pane textarea{box-sizing:border-box!important;max-width:100%!important}.aa-pane [class*='ControlTopbar']{flex-wrap:wrap}
+@media(max-width:760px){body.aa-editor [class*='ToolbarSectionMeta']{display:none!important}body.aa-editor [class*='ToolbarSectionBackLink']{padding:0 10px!important;max-width:112px!important;overflow:hidden}body.aa-editor [class*='BackCollection']{display:none!important}body.aa-editor [class*='BackStatus']{font-size:9px!important;line-height:1.4!important}body.aa-editor [class*='BackArrow']{margin-right:7px!important}body.aa-editor [class*='ToolbarSectionMain']{padding:0 10px!important;min-width:0!important}.aa-pane{max-width:100%!important}#aa-navigation{max-height:none}.aa-classic{margin-top:5px}.aa-pane [class*='ControlContainer']{min-width:0!important}.aa-pane [class*='ControlTopbar'] button{font-size:10px!important}}
+@media(max-width:760px){.aa-pane{padding-top:218px!important}body.aa-editor [class*='ToolbarSubSectionFirst']{display:flex!important}body.aa-editor [class*='ToolbarSectionMeta']{display:flex!important;padding:0 6px!important}body.aa-editor [class*='AppHeaderSiteLink']{display:none!important}body.aa-editor [class*='ToolbarSectionMain']{flex:1!important}body.aa-editor [class*='PreviewButtonContainer']{display:none!important}body.aa-editor [class*='ToolbarButton']{font-size:12px!important;min-height:36px!important}body.aa-editor [class*='AvatarImage']{width:28px!important;height:28px!important}}
+
   </style>
 </head>
 <body>
   <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.18.0/dist/decap-cms.js"></script>
+<script>
+(() => {
+  'use strict';
+  if (new URLSearchParams(location.search).has('classic')) return;
+  const groups = [
+    {title:'معلوماتك الأساسية', keys:['name','nameEn','role','city','status','photo','lead']},
+    {title:'الواجهة الرئيسية', keys:['respectReducedMotion','hero','ringText','miniTag','card','ribbonA','ribbonB','stats']},
+    {title:'الأعمال والمعرض', keys:['categories','workIntro','initialWorks','works']},
+    {title:'الخدمات وخطوات العمل', keys:['services','process']},
+    {title:'الخبرة والمهارات', keys:['experience','tools','skills','education']},
+    {title:'التواصل وآراء العملاء', keys:['whatsapp','phoneShown','platforms','testimonialsTitle','testimonialsLead','testimonials','contactTitle']},
+    {title:'كل الحقول', keys:null}
+  ];
+  const hints = {
+    name:'الاسم اللي بيظهر في أعلى الموقع.',nameEn:'اكتب اسمك بالإنجليزية مثل ما بتستخدمه مهنيًا.',
+    role:'تخصصك أو مسماك المهني باختصار.',city:'المكان اللي حاب يظهر للزوار.',
+    status:'وضّح إذا كنت متاح لمشاريع جديدة.',photo:'صورتك الشخصية في الواجهة. الحد الأقصى للصورة 5 ميغابايت.',
+    lead:'نبذة قصيرة بتظهر في مقدمة الموقع.',hero:'كل عنصر سطر مستقل في العنوان الرئيسي.',
+    respectReducedMotion:'إعداد للحركة: يحترم تفضيل تقليل الحركة عند الزائر.',
+    works:'افتح العمل لتعديل عنوانه وصوره ووصفه. زر Add لإضافة عمل جديد.',
+    services:'افتح الخدمة لتعديل وصفها ومزاياها.',initialWorks:'عدد الأعمال اللي بتظهر قبل الضغط على عرض المزيد.',
+    testimonials:'افتح الرأي لتعديل النص واسم صاحبه ونوع العمل.',
+    phoneShown:'رقم التواصل بالشكل اللي بدك الزوار يشوفوه.',platforms:'عدّل اسم المنصة والرابط الكامل تبعها.',
+    ringText:'النص الإنجليزي المحيط بالدائرة في الواجهة.'
+  };
+  let selected = 0, pane = null, nav = null, timer = null;
+  function keyOf(el) {return el.querySelector('label[for]')?.htmlFor.split('-field-')[0];}
+  function fields() {return pane ? [...pane.children].filter(e => e.matches('[class*="ControlContainer"]')) : [];}
+  function show(index, scroll) {
+    selected=index;
+    if(!pane) return;
+    fields().forEach(el => {
+      const key=keyOf(el), keys=groups[selected].keys;
+      el.classList.toggle('aa-hide', !!keys && !!key && !keys.includes(key));
+    });
+    pane.dataset.aaTitle=groups[index].title;
+    if(nav) [...nav.querySelectorAll('button')].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));
+    if(scroll) pane.parentElement.scrollTo({top:0,behavior:'instant'});
+  }
+  function makeNav() {
+    nav=document.createElement('nav');nav.id='aa-navigation';nav.setAttribute('aria-label','أقسام تحرير المحتوى');
+    const brand=document.createElement('p');brand.className='aa-brand';brand.textContent='مساحة التحرير';nav.append(brand);
+    const sub=document.createElement('p');sub.className='aa-subtitle';sub.textContent='موقع علاء سليم';nav.append(sub);
+    const buttons=document.createElement('div');buttons.className='aa-navbuttons';
+    groups.forEach((g,i)=>{const b=document.createElement('button');b.type='button';b.className='aa-sectionbutton';const n=document.createElement('span');n.textContent=String(i+1).padStart(2,'0');b.append(n,document.createTextNode(g.title));b.addEventListener('click',()=>show(i,true));buttons.append(b);});nav.append(buttons);
+    const help=document.createElement('p');help.className='aa-navhint';help.textContent='التنقّل بين الأقسام لا ينشر التعديلات. بعد المراجعة، استخدم زر Publish بالأعلى للنشر. Published يعني أن النسخة الحالية منشورة.';nav.append(help);
+    const classic=document.createElement('a');classic.className='aa-classic';classic.href='?classic=1'+location.hash;classic.textContent='الرجوع للواجهة الأصلية ↗';nav.append(classic);document.body.append(nav);
+  }
+  function enhance() {
+    const input=document.querySelector('input[id^="name-field-"]');
+    const next=input?.parentElement?.parentElement;
+    if(!next || !next.className.includes('ControlPaneContainer')) {
+      document.body.classList.remove('aa-editor');nav?.remove();nav=null;pane=null;return;
+    }
+    pane=next;pane.classList.add('aa-pane');
+    const list=fields();
+    // All known root fields must be accounted for. Unknown fields stay visible.
+    list.forEach(el=>{
+      el.classList.add('aa-field');const key=keyOf(el);
+      if(hints[key] && !el.querySelector(':scope > .aa-help')) {const p=document.createElement('p');p.className='aa-help';p.textContent=hints[key];el.append(p);}
+    });
+    if(!nav) makeNav();
+    document.body.classList.add('aa-editor');show(selected,false);
+  }
+  const observer=new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(enhance,100);});
+  observer.observe(document.body,{subtree:true,childList:true});
+  window.addEventListener('hashchange',()=>{selected=0;enhance();});
+  // Failed validation must never leave an invalid field hidden in another section.
+  document.addEventListener('click',e=>{if(e.target.closest('[class*="ToolbarContainer"]')) show(6,false);},true);
+  document.addEventListener('invalid',()=>show(6,false),true);
+  enhance();
+})();
+
+</script>
 </body>
 </html>
