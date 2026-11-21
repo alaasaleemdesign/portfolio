@@ -1,0 +1,308 @@
+backend:
+  name: turbo-github
+  turbo_site_id: 9cd510cc-a3fd-423f-9966-0985ad3eebc6
+  branch: main
+site_url: https://alaasaleemdesign.github.io/portfolio/
+display_url: https://alaasaleemdesign.github.io/portfolio/
+media_folder: img
+public_folder: img
+collections:
+- name: site_content
+  label: محتوى الموقع
+  files:
+  - name: content
+    label: محتوى الصفحة الرئيسية
+    file: data/content.json
+    format: json
+    editor:
+      preview: false
+    fields:
+    - label: الاسم بالعربية
+      name: name
+      widget: string
+    - label: الاسم بالإنجليزية
+      name: nameEn
+      widget: string
+    - label: احترام تقليل الحركة في نظام الزائر
+      name: respectReducedMotion
+      widget: boolean
+      default: false
+    - label: التخصص
+      name: role
+      widget: string
+    - label: المدينة
+      name: city
+      widget: string
+    - label: الحالة
+      name: status
+      widget: string
+    - label: رقم واتساب بصيغة دولية بدون +
+      name: whatsapp
+      widget: string
+      hint: 'مثال: 970594714933'
+    - label: رقم الهاتف كما يظهر للزوار
+      name: phoneShown
+      widget: string
+    - label: الصورة الشخصية
+      name: photo
+      widget: image
+      choose_url: true
+      media_library:
+        config:
+          max_file_size: 5242880
+    - label: سطور العنوان الرئيسي
+      name: hero
+      widget: list
+      label_singular: سطر
+      field:
+        label: سطر
+        widget: string
+        name: value
+    - label: الوصف الرئيسي
+      name: lead
+      widget: text
+    - label: نص الدائرة الإنجليزي
+      name: ringText
+      widget: string
+    - label: الوسم الصغير
+      name: miniTag
+      widget: string
+    - label: بطاقة المتابعين
+      name: card
+      widget: object
+      fields:
+      - label: الرقم
+        name: num
+        widget: string
+      - label: الوصف
+        name: text
+        widget: text
+    - label: الشريط المتحرك الأول
+      name: ribbonA
+      widget: list
+      label_singular: عبارة
+      field:
+        label: عبارة
+        widget: string
+        name: value
+    - label: الشريط المتحرك الثاني
+      name: ribbonB
+      widget: list
+      label_singular: عبارة
+      field:
+        label: عبارة
+        widget: string
+        name: value
+    - label: الأرقام
+      name: stats
+      widget: list
+      label_singular: رقم
+      fields:
+      - label: الرقم
+        name: n
+        widget: number
+        value_type: int
+        min: 0
+      - label: اللاحقة
+        name: s
+        widget: string
+        required: false
+      - label: الوصف
+        name: l
+        widget: string
+    - label: تصنيفات الأعمال
+      name: categories
+      widget: object
+      fields:
+      - label: سوشيال ميديا
+        name: social
+        widget: string
+      - label: هوية وشعارات
+        name: brand
+        widget: string
+      - label: مطبوعات
+        name: print
+        widget: string
+      - label: إنفوجرافيك
+        name: info
+        widget: string
+      - label: بانرات
+        name: banner
+        widget: string
+    - label: مقدمة قسم الأعمال
+      name: workIntro
+      widget: text
+    - label: عدد الأعمال الظاهرة قبل زر عرض المزيد
+      name: initialWorks
+      widget: number
+      value_type: int
+      min: 1
+    - label: الأعمال
+      name: works
+      widget: list
+      label_singular: عمل
+      summary: '{{fields.title}}'
+      fields:
+      - label: عنوان العمل
+        name: title
+        widget: string
+      - label: التصنيف
+        name: cat
+        widget: select
+        options: &id001
+        - label: سوشيال ميديا
+          value: social
+        - label: هوية وشعارات
+          value: brand
+        - label: مطبوعات
+          value: print
+        - label: إنفوجرافيك
+          value: info
+        - label: بانرات
+          value: banner
+      - label: الصورة الرئيسية
+        name: img
+        widget: image
+        choose_url: true
+        media_library:
+          config:
+            max_file_size: 5242880
+      - label: صور المعرض
+        name: gallery
+        widget: list
+        label_singular: صورة
+        field:
+          label: صورة
+          widget: image
+          choose_url: true
+          media_library:
+            config:
+              max_file_size: 5242880
+          name: value
+      - label: الوصف
+        name: desc
+        widget: text
+    - label: الخدمات
+      name: services
+      widget: list
+      label_singular: خدمة
+      summary: '{{fields.title}}'
+      fields:
+      - label: اسم الخدمة
+        name: title
+        widget: string
+      - label: الوصف
+        name: text
+        widget: text
+      - label: المزايا
+        name: tags
+        widget: list
+        label_singular: ميزة
+        field:
+          label: ميزة
+          widget: string
+          name: value
+      - label: تصنيف مرتبط
+        name: cat
+        widget: select
+        options: *id001
+    - label: خطوات العمل
+      name: process
+      widget: list
+      label_singular: خطوة
+      summary: '{{fields.t}}'
+      fields:
+      - label: العنوان
+        name: t
+        widget: string
+      - label: الوصف
+        name: d
+        widget: text
+    - label: الخبرة
+      name: experience
+      widget: list
+      label_singular: خبرة
+      summary: '{{fields.role}}'
+      fields:
+      - label: الفترة
+        name: when
+        widget: string
+      - label: المسمى
+        name: role
+        widget: string
+      - label: الجهة
+        name: org
+        widget: string
+      - label: الوصف
+        name: text
+        widget: text
+    - label: الأدوات
+      name: tools
+      widget: list
+      label_singular: أداة
+      field:
+        label: أداة
+        widget: string
+        name: value
+    - label: المهارات
+      name: skills
+      widget: list
+      label_singular: مهارة
+      field:
+        label: مهارة
+        widget: string
+        name: value
+    - label: التعليم
+      name: education
+      widget: list
+      label_singular: مؤهل
+      summary: '{{fields.t}}'
+      fields:
+      - label: الشهادة
+        name: t
+        widget: string
+      - label: التفاصيل
+        name: s
+        widget: text
+    - label: المنصات
+      name: platforms
+      widget: list
+      label_singular: منصة
+      summary: '{{fields.n}}'
+      fields:
+      - label: الاسم
+        name: n
+        widget: string
+      - label: الوصف
+        name: d
+        widget: string
+      - label: الرابط الكامل
+        name: u
+        widget: string
+      - label: الرابط الظاهر
+        name: h
+        widget: string
+    - label: عنوان آراء العملاء
+      name: testimonialsTitle
+      widget: string
+    - label: مقدمة آراء العملاء
+      name: testimonialsLead
+      widget: text
+    - label: آراء العملاء
+      name: testimonials
+      widget: list
+      label_singular: رأي
+      summary: '{{fields.who}}'
+      fields:
+      - label: نص الرأي
+        name: text
+        widget: text
+      - label: صاحب الرأي
+        name: who
+        widget: string
+      - label: نوع العمل
+        name: tag
+        widget: string
+    - label: عنوان قسم التواصل
+      name: contactTitle
+      widget: string
